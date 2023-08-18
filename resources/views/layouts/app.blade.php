@@ -69,7 +69,7 @@
     </style>
 </head>
 <body>
-    <div class="w-screen h-screen">
+    <div class="w-screen h-screen overflow-x-hidden">
         @if(Auth::user())
             @if(Auth::user()->first_time_login == '0')
                 @include('layouts.navigation')

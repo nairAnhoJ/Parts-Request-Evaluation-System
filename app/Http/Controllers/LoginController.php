@@ -32,9 +32,11 @@ class LoginController extends Controller
             if(Auth::user()->first_time_login == '1'){
                 return redirect()->route('password.change');
             }else{
-                if(Auth()->user()->role == '0'){
-                    return redirect()->route('users.index');
-                }
+                return redirect()->route('dashboard.index');
+
+                // if(Auth()->user()->role == '0'){
+                //     return redirect()->route('users.index');
+                // }
             }
         } else {
             return back()->withInput()->withErrors(['error' => 'Invalid credentials']);

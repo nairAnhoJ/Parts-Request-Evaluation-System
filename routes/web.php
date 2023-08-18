@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EvaluationFormController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login.index');
+    if(Auth::check()){
+        return redirect()->route('dashboard.index');
+    }else{
+        return redirect()->route('login.index');
+    }
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
@@ -33,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/evaluation-forms', [EvaluationFormController::class, 'index'])->name('form.index');
     Route::get('/evaluation-forms/add', [EvaluationFormController::class, 'add'])->name('form.add');
+    Route::post('/evaluation-forms/store', [EvaluationFormController::class, 'store'])->name('form.store');
     Route::post('/evaluation-forms/get-customer', [EvaluationFormController::class, 'getCustomer'])->name('form.getCustomer');
     Route::post('/evaluation-forms/get-model', [EvaluationFormController::class, 'getModel'])->name('form.getModel');
     Route::get('/evaluation-forms/delete/{key}', [EvaluationFormController::class, 'delete'])->name('form.delete');
