@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/evaluation-forms', [EvaluationFormController::class, 'index'])->name('form.index');
     Route::get('/evaluation-forms/add', [EvaluationFormController::class, 'add'])->name('form.add');
     Route::post('/evaluation-forms/store', [EvaluationFormController::class, 'store'])->name('form.store');
+    Route::get('/evaluation-forms/edit/{key}', [EvaluationFormController::class, 'edit']);
     Route::post('/evaluation-forms/get-customer', [EvaluationFormController::class, 'getCustomer'])->name('form.getCustomer');
     Route::post('/evaluation-forms/get-model', [EvaluationFormController::class, 'getModel'])->name('form.getModel');
     Route::get('/evaluation-forms/delete/{key}', [EvaluationFormController::class, 'delete'])->name('form.delete');

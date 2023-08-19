@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('fsrr_number');
             $table->string('brand');
             $table->string('model');
-            $table->string('serial');
+            $table->string('serial_number');
             $table->string('hm')->nullable();
             $table->string('technician');
             $table->string('working_environment');

@@ -62,10 +62,11 @@
                 <tbody>
                     @foreach ($forms as $form)
                         <tr>
-                            {{-- <td>{{ $user->id_number }}</td> --}}
+                            <td>{{ $form->number }}</td>
+                            <td>{{ $form->number }}</td>
                             <td>
-                                <a href="{{ url('/system-management/users/edit/'.$user->key) }}" class="hover:underline text-blue-500">EDIT</a> |
-                                <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $user->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
+                                <a href="{{ url('/evaluation-forms/edit/'.$form->key) }}" class="hover:underline text-blue-500">EDIT</a> |
+                                <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $form->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
                             </td>
                         </tr>
                     @endforeach

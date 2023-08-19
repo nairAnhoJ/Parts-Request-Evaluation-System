@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('pres_evaluation_details', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('evaluation_id');
-            $table->string('part_id');
-            $table->string('part_number');
-            $table->string('description');
-            $table->string('quantity');
-            $table->string('unit_price');
+            // $table->string('part_id')->nullable();
+            $table->string('part_number')->nullable();
+            $table->string('description')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('unit_price')->nullable();
             $table->timestamps();
         });
     }

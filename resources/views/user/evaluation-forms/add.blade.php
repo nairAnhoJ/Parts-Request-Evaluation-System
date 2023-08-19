@@ -25,10 +25,25 @@
             <div class="w-full mt-5 flex justify-center">
                 <form action="{{ route('form.store') }}" method="POST" class="w-full sm:!w-5/6">
                     @csrf
-                    <div class="flex gap-x-5">
-                        <div id="nameSelect" class="flex flex-col relative optionDiv mb-3 w-3/4">
+                    <div class="grid grid-cols-3 gap-x-5">
+                        <input type="hidden" id="counter" name="counter" value="1">
+                        <div class="mb-3">
+                            <label for="number" class="block text-sm font-semibold text-gray-600">No. <span class="text-red-500">*</span></label>
+                            <input type="text" id="number" name="number" value="{{ old('number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="control_number" class="block text-sm font-semibold text-gray-600">Control Number <span class="text-red-500">*</span></label>
+                            <input type="text" id="control_number" name="control_number" value="{{ old('control_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sq_number" class="block text-sm font-semibold text-gray-600">SQ Number <span class="text-red-500">*</span></label>
+                            <input type="text" id="sq_number" name="sq_number" value="{{ old('sq_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-x-5">
+                        <div id="nameSelect" class="flex flex-col relative optionDiv mb-3 col-span-2">
                             <label for="name" class="block text-sm font-semibold text-gray-600">Customer Name <span class="text-red-500">*</span></label>
-                            <input type="text" id="name" name="name" class="inputOption block w-full p-2 text-gray-600 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm" required autocomplete="off">
+                            <input type="text" id="name" name="name" class="inputOption block w-full p-2 text-gray-600 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm" autocomplete="off" required>
                             <div class="listOption hidden absolute top-[65px] w-full rounded-lg border border-gray-300 overflow-y-auto max-h-[30vh] text-gray-600 bg-white z-[99] shadow-xl">
                                 <ul>
                                     @foreach ($customers as $customer)
@@ -37,19 +52,19 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="mb-3 flex flex-col w-1/4">
+                        <div class="mb-3 flex flex-col">
                             <label for="area" class="text-gray-700 font-bold text-sm">Area <span class="text-red-500">*</span></label>
-                            <input type="text" id="area" name="area" value="{{ old('area') }}" class="{{ old('area') == '' && session('error') ? 'border-red-500' : '' }} w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
+                            <input type="text" id="area" name="area" value="{{ old('area') }}" class=" w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="text-gray-700 font-bold text-sm">Address <span class="text-red-500">*</span></label>
-                        <input type="text" id="address" name="address" value="{{ old('address') }}" class="{{ old('address') == '' && session('error') ? 'border-red-500' : '' }} w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
+                        <input type="text" id="address" name="address" value="{{ old('address') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                     </div>
                     <div class="grid grid-cols-3 gap-x-5">
                         <div class="mb-3">
                             <label for="brand" class="block text-sm font-semibold text-gray-600">Brand <span class="text-red-500">*</span></label>
-                            <select id="brand" name="knowledge_of_participants" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <select id="brand" name="brand" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 @foreach ($brands as $brand)
                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach
@@ -57,7 +72,7 @@
                         </div>
                         <div id="modelSelect" class="flex flex-col relative optionDiv mb-3 w-full">
                             <label for="model" class="block text-sm font-semibold text-gray-600">Model <span class="text-red-500">*</span></label>
-                            <input type="text" id="model" name="model" class="inputOption block w-full p-2 text-gray-600 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm" required autocomplete="off">
+                            <input type="text" id="model" name="model" class="inputOption block w-full p-2 text-gray-600 border border-gray-300 rounded-lg bg-gray-50 sm:text-sm" autocomplete="off" required>
                             <div class="listOption hidden absolute top-[65px] w-full rounded-lg border border-gray-300 overflow-y-auto max-h-[30vh] text-gray-600 bg-white z-[99] shadow-xl">
                                 <ul id="modelOptions">
                                     @foreach ($models as $model)
@@ -68,13 +83,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="serial_number" class="block text-sm font-semibold text-gray-600">Serial Number <span class="text-red-500">*</span></label>
-                            <input type="text" id="serial_number" name="serial_number" value="{{ old('serial_number') }}" class="{{ old('serial_number') == '' && session('error') ? 'border-red-500' : '' }} w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
+                            <input type="text" id="serial_number" name="serial_number" value="{{ old('serial_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 gap-x-5">
                         <div class="mb-3">
                             <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">FSRR Number <span class="text-red-500">*</span></label>
-                            <input type="text" id="fsrr_number" name="fsrr_number" value="{{ old('fsrr_number') }}" class="{{ old('fsrr_number') == '' && session('error') ? 'border-red-500' : '' }} w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
+                            <input type="text" id="fsrr_number" name="fsrr_number" value="{{ old('fsrr_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
                         <div class="mb-3 w-full">
                             <label for="date_received" class="block text-sm font-semibold text-gray-600">Date Received (FSRR) <span class="text-red-500">*</span></label>
@@ -82,41 +97,15 @@
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                   <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                 </div>
-                                <input datepicker type="text" id="date_received" name="date_received" value="{{ old('date_received') }}" class="{{ old('date_received') == '' && session('error') ? 'border-red-500' : '' }} bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date" autocomplete="off">
+                                <input datepicker type="text" id="date_received" name="date_received" value="{{ old('date_received') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="technician" class="block text-sm font-semibold text-gray-600">Technician <span class="text-red-500">*</span></label>
-                            <input type="text" id="technician" name="technician" value="{{ old('technician') }}" class="{{ old('technician') == '' && session('error') ? 'border-red-500' : '' }} w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
+                            <input type="text" id="technician" name="technician" value="{{ old('technician') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
                     </div>
-                    <div class="grid grid-cols-4 gap-x-5">
-                        <div class="mb-3">
-                            <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">Working Environment <span class="text-red-500">*</span></label>
-                            <div class="flex items-center h-10 gap-x-5">
-                                <div class="flex items-center">
-                                    <input checked id="cold" type="radio" value="COLD" name="working_environment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                    <label for="cold" class="ml-2 text-sm font-medium text-gray-900">COLD</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="dry" type="radio" value="DRY" name="working_environment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                    <label for="dry" class="ml-2 text-sm font-medium text-gray-900">DRY</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">Status <span class="text-red-500">*</span></label>
-                            <div class="flex items-center h-10 gap-x-5">
-                                <div class="flex items-center">
-                                    <input checked id="up" type="radio" value="UP" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                    <label for="up" class="ml-2 text-sm font-medium text-gray-900">UP</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="down" type="radio" value="DOWN" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                    <label for="down" class="ml-2 text-sm font-medium text-gray-900">DOWN</label>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="grid grid-cols-3 gap-x-5">
                         <div class="mb-3">
                             <label for="hm" class="block text-sm font-semibold text-gray-600">HM</label>
                             <input type="text" id="hm" name="hm" value="{{ old('hm') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
@@ -124,6 +113,34 @@
                         <div class="mb-3">
                             <label for="disc" class="block text-sm font-semibold text-gray-600">DISC</label>
                             <input type="text" id="disc" name="disc" value="{{ old('disc') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
+                        </div>
+                        <div class="mb-3 flex">
+                            <div class="w-1/2">
+                                <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">Working Environment <span class="text-red-500">*</span></label>
+                                <div class="flex items-center h-10 gap-x-5">
+                                    <div class="flex items-center">
+                                        <input checked id="cold" type="radio" value="COLD" name="working_environment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="cold" class="ml-2 text-sm font-medium text-gray-900">COLD</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="dry" type="radio" value="DRY" name="working_environment" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="dry" class="ml-2 text-sm font-medium text-gray-900">DRY</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-1/2">
+                                <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">Status <span class="text-red-500">*</span></label>
+                                <div class="flex items-center h-10 gap-x-5">
+                                    <div class="flex items-center">
+                                        <input checked id="up" type="radio" value="UP" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="up" class="ml-2 text-sm font-medium text-gray-900">UP</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="down" type="radio" value="DOWN" name="status" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                                        <label for="down" class="ml-2 text-sm font-medium text-gray-900">DOWN</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -154,16 +171,16 @@
                                     <div id="part1" class="flex w-full">
                                         <div class="text-center border-b border-r border-gray-400 w-[5%] flex items-center justify-center font-bold">1</div>
                                         <div class="text-center w-[25%] border-b border-r border-gray-400 pb-2.5 px-5">
-                                            <input type="text" name="part_number_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                                            <input type="text" name="part_number_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" required>
                                         </div>
                                         <div class="text-center w-[42%] border-b border-r border-gray-400 pb-2.5 px-5">
-                                            <input type="text" name="description_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                                            <input type="text" name="description_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" required>
                                         </div>
                                         <div class="text-center w-[10%] border-b border-r border-gray-400 pb-2.5 px-5">
-                                            <input type="text" name="quantity_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                                            <input type="text" name="quantity_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" required>
                                         </div>
                                         <div class="text-center w-[10%] border-b border-r border-gray-400 pb-2.5 px-5">
-                                            <input type="text" name="price_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                                            <input type="text" name="price_1" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" required>
                                         </div>
                                         <div class="w-[8%] border-b border-gray-400 flex items-center justify-center">
                                             {{-- <button type="button" data-count="1" class="deletePart hover:scale-105">
@@ -174,6 +191,10 @@
                                 {{-- BODY --}}
                             </div>
                         </div>
+                    </div>
+                    <div class="mb-8">
+                        <label for="remarks" class="text-gray-700 font-bold text-sm">Remarks</label>
+                        <input type="text" id="remarks" name="remarks" value="{{ old('remarks') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
                     </div>
 
                     <div class="flex justify-between gap-x-5 w-full">
@@ -196,6 +217,14 @@
             jQuery(document).on( "click", ".inputOption", function(e){
                 $('.content').not($(this).closest('.optionDiv').find('.listOption')).addClass('hidden');
                 $(this).closest('.optionDiv').find('.listOption').toggleClass('hidden');
+                var value = $(this).val().toLowerCase();
+                searchFilter(value);
+                e.stopPropagation();
+            });
+
+            jQuery(document).on( "keyup", ".inputOption", function(e){
+                $('.content').not($(this).closest('.optionDiv').find('.listOption')).addClass('hidden');
+                $(this).closest('.optionDiv').find('.listOption').removeClass('hidden');
                 var value = $(this).val().toLowerCase();
                 searchFilter(value);
                 e.stopPropagation();
@@ -268,16 +297,16 @@
                     <div id="part${counter}" class="flex w-full">
                         <div class="text-center border-b border-r border-gray-400 w-[5%] flex items-center justify-center font-bold">${counter}</div>
                         <div class="text-center w-[25%] border-b border-r border-gray-400 pb-2.5 px-5">
-                            <input type="text" name="part_number_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                            <input type="text" name="part_number_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off">
                         </div>
                         <div class="text-center w-[42%] border-b border-r border-gray-400 pb-2.5 px-5">
-                            <input type="text" name="description_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                            <input type="text" name="description_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off">
                         </div>
                         <div class="text-center w-[10%] border-b border-r border-gray-400 pb-2.5 px-5">
-                            <input type="text" name="quantity_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                            <input type="text" name="quantity_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off">
                         </div>
                         <div class="text-center w-[10%] border-b border-r border-gray-400 pb-2.5 px-5">
-                            <input type="text" name="price_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3">
+                            <input type="text" name="price_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off">
                         </div>
                         <div class="w-[8%] border-b border-gray-400 flex items-center justify-center">
                             <button type="button" data-count="part${counter}" class="deletePart hover:scale-105">
@@ -286,6 +315,7 @@
                         </div>
                     </div>
                 `);
+                $('#counter').val(counter);
                 counter++;
             });
 
