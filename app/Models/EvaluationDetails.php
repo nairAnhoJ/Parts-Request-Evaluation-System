@@ -11,7 +11,7 @@ class EvaluationDetails extends Model
     
     protected $table = 'pres_evaluation_details';
 
-    public function evaluationForm(){
+    public function form(){
         return $this->belongsTo(EvaluationForm::class, '');
     }
 }

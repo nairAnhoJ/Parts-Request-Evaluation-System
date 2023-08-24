@@ -10,4 +10,8 @@ class Customer extends Model
     use HasFactory;
     
     protected $table = 'customers';
+
+    public function form(){
+        return $this->belongsTo(EvaluationForm::class, 'customer_id');
+    }
 }

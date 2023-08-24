@@ -11,7 +11,11 @@ class EvaluationForm extends Model
     
     protected $table = 'pres_evaluation_forms';
 
-    public function evaluationDetails(){
+    public function details(){
         return $this->hasMany(EvaluationDetails::class);
+    }
+
+    public function customer(){
+        return $this->belongsTo(Customer::class);
     }
 }

@@ -51,11 +51,64 @@
 
     <div class="min-h-[calc(100%-56px)] w-full p-4 bg-gray-100">
         <div class="w-full">
-            <table id="userTable" class="compact row-border hover w-full !mb-2">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Number
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Control Number
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Customer Name
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Encoder
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-white border-b">
+                            @foreach ($forms as $form)
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    {{ $form->number }}
+                                </th>
+                                <td class="px-6 py-4 text-center">
+                                    {{ $form->control_number }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    {{ $form->customer['name'] }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    {{ $form->encoder }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <a href="{{ url('/evaluation-forms/edit/'.$form->key) }}" class="hover:underline text-blue-500">EDIT</a> |
+                                    <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $form->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
+                                </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+            
+            {{-- <table id="userTable" class="compact row-border hover w-full !mb-2">
                 <thead>
                     <tr>
-                        <th>ID Number</th>
-                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Control Number</th>
+                        <th>Control Number</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -71,7 +124,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 

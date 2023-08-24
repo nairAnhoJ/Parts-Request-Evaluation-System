@@ -50,7 +50,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function technician(){
-        
-    }
+    // public function form(){
+    //     return $this->belongsTo(EvaluationForm::class, 'customer_id');
+    // }
 }
