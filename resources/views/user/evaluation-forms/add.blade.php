@@ -63,6 +63,25 @@
                     </div>
                     <div class="grid grid-cols-3 gap-x-5">
                         <div class="mb-3">
+                            <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">FSRR Number <span class="text-red-500">*</span></label>
+                            <input type="text" id="fsrr_number" name="fsrr_number" value="{{ old('fsrr_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
+                        </div>
+                        <div class="mb-3 w-full">
+                            <label for="date_received" class="block text-sm font-semibold text-gray-600">Date Received (FSRR) <span class="text-red-500">*</span></label>
+                            <div class="relative w-full">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <input datepicker type="text" id="date_received" name="date_received" value="{{ old('date_received') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="technician" class="block text-sm font-semibold text-gray-600">Technician <span class="text-red-500">*</span></label>
+                            <input type="text" id="technician" name="technician" value="{{ old('technician') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-x-5">
+                        <div class="mb-3">
                             <label for="brand" class="block text-sm font-semibold text-gray-600">Brand <span class="text-red-500">*</span></label>
                             <select id="brand" name="brand" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 @foreach ($brands as $brand)
@@ -84,25 +103,6 @@
                         <div class="mb-3">
                             <label for="serial_number" class="block text-sm font-semibold text-gray-600">Serial Number <span class="text-red-500">*</span></label>
                             <input type="text" id="serial_number" name="serial_number" value="{{ old('serial_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-x-5">
-                        <div class="mb-3">
-                            <label for="fsrr_number" class="block text-sm font-semibold text-gray-600">FSRR Number <span class="text-red-500">*</span></label>
-                            <input type="text" id="fsrr_number" name="fsrr_number" value="{{ old('fsrr_number') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3 w-full">
-                            <label for="date_received" class="block text-sm font-semibold text-gray-600">Date Received (FSRR) <span class="text-red-500">*</span></label>
-                            <div class="relative w-full">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                                </div>
-                                <input datepicker type="text" id="date_received" name="date_received" value="{{ old('date_received') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Select date" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="technician" class="block text-sm font-semibold text-gray-600">Technician <span class="text-red-500">*</span></label>
-                            <input type="text" id="technician" name="technician" value="{{ old('technician') }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 gap-x-5">
@@ -234,6 +234,10 @@
                 $(".listOption li").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(searchInput) > -1)
                 });
+                var liCount = $(".listOption li:visible").length;
+                if(liCount < 1){
+                    $('.listOption').addClass('hidden');
+                }
             }
             
             jQuery(document).on( "keydown", ".inputOption", function(e){

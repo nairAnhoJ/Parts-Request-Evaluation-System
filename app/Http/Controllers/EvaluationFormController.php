@@ -15,10 +15,25 @@ use Illuminate\Support\Facades\Validator;
 
 class EvaluationFormController extends Controller
 {
-    public function index(){
-        $forms = EvaluationForm::where('is_deleted', 0)->get();
+    public function index(Request $request){
+        $perPage = 50;
+        $page = $request->input('page', 1);
+        $search = $request->input('search');
 
-        return view('user.evaluation-forms.index', compact('forms'));
+        $forms = EvaluationForm::with('details', 'customer')
+            ->where('is_deleted', 0)
+            ->where(function ($query) use ($search) {
+                $query->whereRaw("CONCAT_WS(' ', number, control_number, fsrr_number, brand, model, serial_number, hm, technician, sq_number, encoder, date_received) LIKE ?", ['%' . $search . '%'])
+                      ->orWhereHas('details', function ($query) use ($search) {
+                          $query->whereRaw("CONCAT_WS(' ', part_number, description) LIKE ?", ['%' . $search . '%']);
+                      })
+                      ->orWhereHas('customer', function ($query) use ($search) {
+                            $query->whereRaw("CONCAT_WS(' ', name, address, area) LIKE ?", ['%' . $search . '%']);
+                      });
+            })
+            ->paginate($perPage, ['*'], 'page', $page);
+
+        return view('user.evaluation-forms.index', compact('forms', 'search'));
     }
 
     public function add(){
@@ -64,20 +79,23 @@ class EvaluationFormController extends Controller
         $area = $request->area;
         $customer = Customer::where('name', $name)->first();
         if($customer){
-            $customer_id = $customer->id;
+            $customer->name = strtoupper($name);
+            $customer->address = strtoupper($address);
+            $customer->area = strtoupper($area);
+            $customer->save();
         }else{
-            $new_customer = new Customer();
-            $new_customer->name = strtoupper($name);
-            $new_customer->address = strtoupper($address);
-            $new_customer->area = strtoupper($area);
-            $new_customer->key = Str::uuid();
-            $new_customer->save();
+            $customer = new Customer();
+            $customer->name = strtoupper($name);
+            $customer->address = strtoupper($address);
+            $customer->area = strtoupper($area);
+            $customer->key = Str::uuid();
+            $customer->save();
         }
         $counter = $request->counter;
         $number = $request->number;
         $control_number = $request->control_number;
         $sq_number = $request->sq_number;
-        $customer_id = $new_customer->id;
+        $customer_id = $customer->id;
         $brand = $request->brand;
         $model = $request->model;
         $serial_number = $request->serial_number;
@@ -110,7 +128,6 @@ class EvaluationFormController extends Controller
         $new_evaluation->key = Str::uuid();
         $new_evaluation->save();
 
-        $x = 1;
         for($i = 1; $i <= $counter; $i++){
             $part_number = 'part_number_'.$i;
             $description = 'description_'.$i;
@@ -131,6 +148,127 @@ class EvaluationFormController extends Controller
         return redirect()->route('form.index')->with('success', 'Success');
     }
 
+    public function edit(Request $request){
+        $customers = Customer::where('is_deleted', 0)->get();
+        $brands = Brand::where('is_deleted', 0)->get();
+        $models = BrandModel::where('brand_id', 1)->where('is_deleted', 0)->get();
+        $form = EvaluationForm::with('details', 'customer')->where('key', $request->key)->first();
+
+
+        return view('user.evaluation-forms.edit', compact('customers', 'brands', 'models', 'form'));
+    }
+
+    public function update(Request $request){
+        $validator = Validator::make($request->all(), [
+            'number' => 'required',
+            'control_number' => 'required',
+            'sq_number' => 'required',
+            'name' => 'required',
+            'area' => 'required',
+            'address' => 'required',
+            'brand' => 'required',
+            'address' => 'required',
+            'model' => 'required',
+            'serial_number' => 'required',
+            'fsrr_number' => 'required',
+            'date_received' => 'required',
+            'technician' => 'required',
+            'working_environment' => 'required',
+            'part_number_1' => 'required',
+            'description_1' => 'required',
+            'quantity_1' => 'required',
+            'price_1' => 'required',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', "Oops! It seems like you missed a few required fields.")->withInput();
+        }
+
+        $name = $request->name;
+        $address = $request->address;
+        $area = $request->area;
+        $customer = Customer::where('name', $name)->first();
+        if($customer){
+            $customer->name = strtoupper($name);
+            $customer->address = strtoupper($address);
+            $customer->area = strtoupper($area);
+            $customer->save();
+        }else{
+            $customer = new Customer();
+            $customer->name = strtoupper($name);
+            $customer->address = strtoupper($address);
+            $customer->area = strtoupper($area);
+            $customer->key = Str::uuid();
+            $customer->save();
+        }
+        $counter = $request->counter;
+        $number = $request->number;
+        $control_number = $request->control_number;
+        $sq_number = $request->sq_number;
+        $customer_id = $customer->id;
+        $brand = $request->brand;
+        $model = $request->model;
+        $serial_number = $request->serial_number;
+        $fsrr_number = $request->fsrr_number;
+        $date_received = $request->date_received;
+        $technician = $request->technician;
+        $hm = $request->hm;
+        $disc = $request->disc;
+        $working_environment = $request->working_environment;
+        $status = $request->status;
+        $remarks = $request->remarks;
+
+        $evaluation = EvaluationForm::where('key', $request->key)->first();
+        $evaluation->number = $number;
+        $evaluation->control_number = $control_number;
+        $evaluation->customer_id = $customer_id;
+        $evaluation->fsrr_number = $fsrr_number;
+        $evaluation->brand = $brand;
+        $evaluation->model = $model;
+        $evaluation->serial_number = $serial_number;
+        $evaluation->hm = $hm;
+        $evaluation->technician = $technician;
+        $evaluation->working_environment = $working_environment;
+        $evaluation->status = $status;
+        $evaluation->disc = $disc;
+        $evaluation->remarks = $remarks;
+        $evaluation->sq_number = $sq_number;
+        $evaluation->encoder = Auth::user()->name;
+        $evaluation->date_received = $date_received;
+        $evaluation->save();
+
+        EvaluationDetails::where('evaluation_id', $evaluation->id)->delete();
+
+        for($i = 1; $i <= $counter; $i++){
+            $part_number = 'part_number_'.$i;
+            $description = 'description_'.$i;
+            $quantity = 'quantity_'.$i;
+            $price = 'price_'.$i;
+
+            if($request->$description != null || $request->$description != ''){
+                $details = new EvaluationDetails();
+                $details->evaluation_id = $evaluation->id;
+                $details->part_number = $request->$part_number;
+                $details->description = $request->$description;
+                $details->quantity = $request->$quantity;
+                $details->unit_price = $request->$price;
+                $details->save();
+            }
+        }
+
+        return redirect()->route('form.index')->with('success', 'Success');
+    }
+
+    public function getForm(Request $request){
+        $key = $request->key;
+        $form = EvaluationForm::with('details', 'customer')->where('key', $request->key)->first();
+
+        $response = [
+            "name" => $form->customer->name
+        ];
+
+        echo json_encode($response);
+    }
 
     public function getCustomer(Request $request){
         $customer = Customer::where('id', $request->id)->where('is_deleted', 0)->first();
@@ -142,7 +280,6 @@ class EvaluationFormController extends Controller
 
         echo json_encode($result);
     }
-
 
     public function getModel(Request $request){
         $models = BrandModel::where('brand_id', $request->id)->where('is_deleted', 0)->get();

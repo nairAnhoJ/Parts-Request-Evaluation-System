@@ -12,6 +12,6 @@ class Customer extends Model
     protected $table = 'customers';
 
     public function form(){
-        return $this->belongsTo(EvaluationForm::class, 'customer_id');
+        return $this->hasMany(EvaluationForm::class, 'customer_id');
     }
 }

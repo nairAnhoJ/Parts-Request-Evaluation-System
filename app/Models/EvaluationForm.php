@@ -12,7 +12,7 @@ class EvaluationForm extends Model
     protected $table = 'pres_evaluation_forms';
 
     public function details(){
-        return $this->hasMany(EvaluationDetails::class);
+        return $this->hasMany(EvaluationDetails::class, 'evaluation_id');
     }
 
     public function customer(){
