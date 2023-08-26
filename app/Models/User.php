@@ -49,8 +49,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    // public function form(){
-    //     return $this->belongsTo(EvaluationForm::class, 'customer_id');
-    // }
 }

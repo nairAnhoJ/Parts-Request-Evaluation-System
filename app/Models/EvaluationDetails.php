@@ -10,8 +10,4 @@ class EvaluationDetails extends Model
     use HasFactory;
     
     protected $table = 'pres_evaluation_details';
-
-    public function form(){
-        return $this->belongsTo(EvaluationForm::class);
-    }
 }

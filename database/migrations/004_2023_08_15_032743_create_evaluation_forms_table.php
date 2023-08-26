@@ -27,10 +27,13 @@ return new class extends Migration
             $table->string('status');
             $table->string('disc')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('originator')->nullable();
+            $table->string('datetime_originated')->nullable();
             $table->string('sq_number')->nullable();
             $table->string('encoder')->nullable();
-            $table->string('approve_1')->nullable();
-            $table->string('approve_2')->nullable();
+            $table->string('datetime_encoded')->nullable();
+            $table->string('approver')->nullable();
+            $table->string('datetime_approved')->nullable();
             $table->string('date_received');
             $table->boolean('is_deleted')->default(0);
             $table->string('key');

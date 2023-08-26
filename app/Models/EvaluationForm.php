@@ -18,4 +18,8 @@ class EvaluationForm extends Model
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class, 'brand');
+    }
 }

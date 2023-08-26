@@ -46,13 +46,11 @@ class EvaluationFormController extends Controller
         return view('user.evaluation-forms.add', compact('customers', 'brands', 'models'));
     }
 
-
     public function store(Request $request){
         // dd($request);
         $validator = Validator::make($request->all(), [
             'number' => 'required',
             'control_number' => 'required',
-            'sq_number' => 'required',
             'name' => 'required',
             'area' => 'required',
             'address' => 'required',
@@ -94,7 +92,6 @@ class EvaluationFormController extends Controller
         $counter = $request->counter;
         $number = $request->number;
         $control_number = $request->control_number;
-        $sq_number = $request->sq_number;
         $customer_id = $customer->id;
         $brand = $request->brand;
         $model = $request->model;
@@ -122,8 +119,8 @@ class EvaluationFormController extends Controller
         $new_evaluation->status = $status;
         $new_evaluation->disc = $disc;
         $new_evaluation->remarks = $remarks;
-        $new_evaluation->sq_number = $sq_number;
-        $new_evaluation->encoder = Auth::user()->name;
+        $new_evaluation->originator = Auth::user()->name;
+        $new_evaluation->datetime_originated = date('Y-m-d H:i:s');
         $new_evaluation->date_received = $date_received;
         $new_evaluation->key = Str::uuid();
         $new_evaluation->save();
@@ -162,7 +159,6 @@ class EvaluationFormController extends Controller
         $validator = Validator::make($request->all(), [
             'number' => 'required',
             'control_number' => 'required',
-            'sq_number' => 'required',
             'name' => 'required',
             'area' => 'required',
             'address' => 'required',
@@ -204,7 +200,6 @@ class EvaluationFormController extends Controller
         $counter = $request->counter;
         $number = $request->number;
         $control_number = $request->control_number;
-        $sq_number = $request->sq_number;
         $customer_id = $customer->id;
         $brand = $request->brand;
         $model = $request->model;
@@ -232,7 +227,6 @@ class EvaluationFormController extends Controller
         $evaluation->status = $status;
         $evaluation->disc = $disc;
         $evaluation->remarks = $remarks;
-        $evaluation->sq_number = $sq_number;
         $evaluation->encoder = Auth::user()->name;
         $evaluation->date_received = $date_received;
         $evaluation->save();
@@ -261,10 +255,10 @@ class EvaluationFormController extends Controller
 
     public function getForm(Request $request){
         $key = $request->key;
-        $form = EvaluationForm::with('details', 'customer')->where('key', $request->key)->first();
+        $form = EvaluationForm::with('details', 'customer', 'brand')->where('key', $key)->first();
 
         $response = [
-            "name" => $form->customer->name
+            "form" => $form
         ];
 
         echo json_encode($response);

@@ -56,10 +56,22 @@
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full w-full">
                     <!-- Modal header -->
-                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                        <h3 id="viewName" class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <div class="flex items-end justify-between p-4 border-b rounded-t dark:border-gray-600">
+
+                        <div class="w-1/2 flex justify-between items-center text-center text-sm">
+                            <div class="w-full flex items-center">
+                                <p class="mr-1">Number</p>
+                                <p id="viewNumber" class="px-10 border-b border-gray-400 font-semibold"></p>
+                            </div>
+                            <div class="w-full flex flex-row-reverse items-center">
+                                <p id="viewControlNumber" class="px-10 border-b border-gray-400 font-semibold"></p>
+                                <p class="mr-1">Control Number</p>
+                            </div>
+                        </div>
+
+                        {{-- <h3 id="viewName" class="text-xl font-semibold text-gray-900 dark:text-white">
                             Customer Name
-                        </h3>
+                        </h3> --}}
                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="viewModal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -72,6 +84,83 @@
                         <div class="w-full flex">
                             <div class="w-full border-r">
                                 <div class="w-full h-[calc(100vh-204px)] overflow-x-hidden overflow-y-auto pr-4">
+
+                                    <div class="w-full flex justify-between items-center text-sm mt-3 gap-x-3">
+                                        <div class="w-4/5 flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Customer Name</p>
+                                            <p id="viewName" class="w-full px-3 border-b border-gray-400 font-semibold"></p>
+                                        </div>
+                                        <div class="w-1/5 flex items-center">
+                                            <p class="mr-1 text-center">Area</p>
+                                            <p id="viewArea" class="w-full border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full flex justify-between items-center text-sm mt-3">
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Address</p>
+                                            <p id="viewAddress" class="w-full px-3 border-b border-gray-400 font-semibold"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full flex justify-between items-center text-sm mt-3 gap-x-3">
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">FSRR#</p>
+                                            <p id="viewFSRR" class="w-full px-3 border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Date Received</p>
+                                            <p id="viewDateReceived" class="w-full border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center">Tech</p>
+                                            <p id="viewTech" class="w-full border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full flex justify-between items-center text-sm mt-3 gap-x-3">
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Brand</p>
+                                            <p id="viewBrand" class="w-full px-3 border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Model</p>
+                                            <p id="viewModel" class="w-full border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Serial No.</p>
+                                            <p id="viewSerialNo" class="w-full border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-full flex justify-between items-center text-sm mt-3 gap-x-3">
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">WE</p>
+                                            <p id="viewWE" class="w-full px-3 border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Status</p>
+                                            <p id="viewStatus" class="w-full border-b border-gray-400 font-semibold text-center"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">HM</p>
+                                            <p id="viewHM" class="w-full border-b border-gray-400 font-semibold text-center h-5"></p>
+                                        </div>
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Disc.</p>
+                                            <p id="viewDisc" class="w-full border-b border-gray-400 font-semibold text-center h-5"></p>
+                                        </div>
+                                    </div>
+
+                                    <div id="partsContainer" class="w-full mt-10 text-xs">
+                                    </div>
+
+                                    <div class="w-full flex justify-between items-center text-sm mt-3">
+                                        <div class="w-full flex items-center">
+                                            <p class="mr-1 text-center whitespace-nowrap">Remarks</p>
+                                            <p id="viewRemarks" class="w-full px-3 border-b border-gray-400 font-medium h-5"></p>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
@@ -158,7 +247,7 @@
                                     {{ $form->customer->name }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    {{ $form->encoder }}
+                                    {{ $form->originator }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <a href="{{ url('/evaluation-forms/edit?key='.$form->key) }}" class="editButton hover:underline text-blue-500">EDIT</a> |
@@ -191,8 +280,7 @@
             });
 
             $('#clearButton').click(function(){
-                $('#search').val('');
-                $('#searchForm').submit();
+                window.location.href = "{{ route('form.index') }}";
             });
 
             $('.formRow').click(function(e){
@@ -209,7 +297,49 @@
                             _token: _token
                         },
                         success: function(response) {
-                            $("#viewName").html(response.name);
+                            console.log(response.form['details']);
+                            $("#viewNumber").html(response.form['number']);
+                            $("#viewControlNumber").html(response.form['control_number']);
+                            $("#viewName").html(response.form['customer']['name']);
+                            $("#viewArea").html(response.form['customer']['area']);
+                            $("#viewAddress").html(response.form['customer']['address']);
+                            $("#viewFSRR").html(response.form['fsrr_number']);
+                            $("#viewDateReceived").html(response.form['date_received']);
+                            $("#viewBrand").html(response.form['brand']['name']);
+                            $("#viewModel").html(response.form['model']);
+                            $("#viewSerialNo").html(response.form['serial_number']);
+                            $("#viewTech").html(response.form['technician']);
+                            $("#viewWE").html(response.form['working_environment']);
+                            $("#viewStatus").html(response.form['status']);
+                            $("#viewHM").html(response.form['hm']);
+                            $("#viewDisc").html(response.form['disc']);
+                            $("#viewRemarks").html(response.form['remarks']);
+
+                            $('#partsContainer').html(`
+                                <div class="flex w-full border-y">
+                                    <div class="text-center py- w-[5%]">No</div>
+                                    <div class="text-center w-[25%] p-2">Part Number</div>
+                                    <div class="text-center w-[40%] p-2">Description</div>
+                                    <div class="text-center w-[15%] p-2">Quantity</div>
+                                    <div class="text-center w-[15%] p-2 whitespace-nowrap">Unit Price(€)</div>
+                                </div>
+                            `);
+
+                            var details = response.form['details'];
+                            var x = 1;
+
+                            details.forEach(detail => {
+                                $('#partsContainer').append(`
+                                    <div class="flex w-full border-b">
+                                        <div class="text-center p-2 w-[5%]">${x++}</div>
+                                        <div class="text-center w-[25%] p-2">${detail['part_number']}</div>
+                                        <div class="text-left w-[40%] p-2">${detail['description']}</div>
+                                        <div class="text-center w-[15%] p-2">${detail['quantity']}</div>
+                                        <div class="text-center w-[15%] p-2 whitespace-nowrap">${detail['unit_price']}</div>
+                                    </div>
+                                `);
+                            });
+
                             $('#viewButton').click();
                         },
                     });

@@ -27,18 +27,15 @@
                     @csrf
                     <input type="hidden" name="key" value="{{ $form->key }}">
                     <div class="grid grid-cols-3 gap-x-5">
-                        <input type="hidden" id="counter" name="counter" value="1">
+                        <input type="hidden" id="counter" name="counter" value="{{ $form->details->count() }}">
                         <div class="mb-3">
                             <label for="number" class="block text-sm font-semibold text-gray-600">No. <span class="text-red-500">*</span></label>
                             <input type="text" id="number" name="number" value="{{ $form->number }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
+                        <div></div>
                         <div class="mb-3">
                             <label for="control_number" class="block text-sm font-semibold text-gray-600">Control Number <span class="text-red-500">*</span></label>
                             <input type="text" id="control_number" name="control_number" value="{{ $form->control_number }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="sq_number" class="block text-sm font-semibold text-gray-600">SQ Number <span class="text-red-500">*</span></label>
-                            <input type="text" id="sq_number" name="sq_number" value="{{ $form->sq_number }}" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="grid grid-cols-3 gap-x-5">
