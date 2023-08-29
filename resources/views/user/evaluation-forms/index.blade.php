@@ -162,6 +162,28 @@
                                         </div>
                                     </div>
 
+                                    <div class="w-full grid grid-cols-3 mt-10">
+                                        <div class="flex flex-col items-center justify-center self-end">
+                                            <div class="border-b border-gray-400 w-3/4 text-center whitespace-nowrap text-sm">
+                                                 <span class="mr-3">John Arian Malondras</span><span class="text-xs">08/29/2023</span>
+                                            </div>
+                                            <p class="text-sm font-bold">SA/SC/TECH</p>
+                                        </div>
+                                        <div class="flex flex-col items-center justify-center self-end">
+                                            <div class="border-b border-gray-400 w-3/4 text-center whitespace-nowrap text-sm">
+                                                <span class="mr-3">John Arian Malondras</span><span class="text-xs">08/29/2023</span>
+                                            </div>
+                                            <p class="text-sm font-bold">MNGR/HEAD</p>
+                                        </div>
+                                        <div class="flex flex-col items-center justify-center">
+                                            <p class="text-sm">SQ NUMBER</p>
+                                            <div class="border-b border-gray-400 w-3/4 text-center whitespace-nowrap text-sm">
+                                                <span class="mr-3">John Arian Malondras</span><span class="text-xs">08/29/2023</span>
+                                            </div>
+                                            <p class="text-sm font-bold">ENCODER</p>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="w-full">
