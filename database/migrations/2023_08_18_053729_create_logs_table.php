@@ -11,8 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('logs', function (Blueprint $table) {
-            $table->id();
+        Schema::create('pres_logs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('table');
+            $table->string('table_key');
+            $table->string('action'); // SET, EDIT, DELETE
+            $table->string('description');
+            $table->string('field')->nullable();
+            $table->string('before')->nullable();
+            $table->string('after')->nullable();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

@@ -173,8 +173,16 @@
                                     @foreach ($form->details as $detail)
                                         <div id="part{{ $count }}" class="flex w-full">
                                             <div class="text-center border-b border-r border-gray-400 w-[5%] flex items-center justify-center font-bold">{{ $count }}</div>
-                                            <div class="text-center w-[25%] border-b border-r border-gray-400 pb-2.5 px-5">
-                                                <input type="text" name="part_number_{{ $count }}" value="{{ $detail->part_number }}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" {{ ($count == 1)? 'required' : '' }}>
+
+                                            <div class="partSelect flex flex-col relative optionDiv w-[25%] border-b border-r border-gray-400 pb-2.5 px-5">
+                                                <input type="text" name="part_number_{{ $count }}" value="{{ $detail->part_number }}" class="inputOption partsInputOption w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" {{ ($count == 1)? 'required' : '' }}>
+                                                <div class="listOption hidden absolute top-[45px] left-0 min-w-full whitespace-nowrap rounded-lg border border-gray-300 overflow-x-hidden overflow-y-auto max-h-[25vh] text-gray-600 bg-white z-[99] shadow-xl">
+                                                    <ul class="partUl">
+                                                        @foreach ($parts as $part)
+                                                            <li data-partno="{{ $part->partno }}" data-partname="{{ $part->partname }}" data-price="{{ $part->price }}" class="pl-2 py-2 pr-5 first:border-0 border-t border-gray-300 hover:bg-gray-200 cursor-pointer">{{ $part->partno }} - {{ $part->partname }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <div class="text-center w-[42%] border-b border-r border-gray-400 pb-2.5 px-5">
                                                 <input type="text" name="description_{{ $count }}" value="{{ $detail->description }}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" {{ ($count == 1)? 'required' : '' }}>
@@ -232,6 +240,25 @@
             });
 
             jQuery(document).on( "keyup", ".inputOption", function(e){
+                if($('.partsInputOption').is(':focus')){
+                    var searchValue = $(this).val();
+                    var _token = $('input[name="_token"]').val();
+
+                    $.ajax({
+                        url:"{{ route('form.searchParts') }}",
+                        method:"POST",
+                        dataType: "json",
+                        data:{
+                            searchValue: searchValue,
+                            _token: _token
+                        },
+                        success:function(result){
+                            partsTotal = result.partsTotal;
+                            console.log(result.partsUl);
+                            $('.partUl').html(result.partsUl);
+                        }
+                    })
+                }
                 $('.content').not($(this).closest('.optionDiv').find('.listOption')).addClass('hidden');
                 $(this).closest('.optionDiv').find('.listOption').removeClass('hidden');
                 var value = $(this).val().toLowerCase();
@@ -287,6 +314,20 @@
                 $('.listOption').addClass('hidden');
             });
 
+            jQuery(document).on( "click", ".partSelect .listOption li", function(){
+                var number = $(this).data('partno');
+                var name = $(this).data('partname');
+                var price = $(this).data('price');
+                var inputName = $(this).closest('.optionDiv').find('input').attr('name');
+                var inputNumber = inputName.split('_')[2];
+
+                $(this).closest('.optionDiv').find('input').val(number);
+                $('input[name="description_' + inputNumber + '"]').val(name);
+                $('input[name="price_' + inputNumber + '"]').val(price);
+                
+                $('.listOption').addClass('hidden');
+            });
+
             $('#brand').change(function() {
                 var id = $(this).val();
                 var _token = $('input[name="_token"]').val();
@@ -309,8 +350,15 @@
                 $('#partsGrid').append(`
                     <div id="part${counter}" class="flex w-full">
                         <div class="text-center border-b border-r border-gray-400 w-[5%] flex items-center justify-center font-bold">${counter}</div>
-                        <div class="text-center w-[25%] border-b border-r border-gray-400 pb-2.5 px-5">
-                            <input type="text" name="part_number_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off">
+                        <div class="partSelect flex flex-col relative optionDiv w-[25%] border-b border-r border-gray-400 pb-2.5 px-5">
+                            <input type="text" name="part_number_${counter}" class="inputOption partsInputOption w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off" required>
+                            <div class="listOption hidden absolute top-[45px] left-0 whitespace-nowrap rounded-lg border border-gray-300 overflow-x-hidden overflow-y-auto max-h-[25vh] text-gray-600 bg-white z-[99] shadow-xl min-w-full">
+                                <ul class="partUl">
+                                    @foreach ($parts as $part)
+                                        <li data-partno="{{ $part->partno }}" data-partname="{{ $part->partname }}" data-price="{{ $part->price }}" class="pl-2 py-2 pr-5 first:border-0 border-t border-gray-300 hover:bg-gray-200 cursor-pointer">{{ $part->partno }} - {{ $part->partname }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                         <div class="text-center w-[42%] border-b border-r border-gray-400 pb-2.5 px-5">
                             <input type="text" name="description_${counter}" class="w-full border-0 border-b bg-gray-100 focus:border-blue-500 focus:border-b-2 focus:ring-0 text-center pb-1 pt-3" autocomplete="off">

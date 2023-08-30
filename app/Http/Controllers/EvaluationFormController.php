@@ -7,6 +7,7 @@ use App\Models\BrandModel;
 use App\Models\Customer;
 use App\Models\EvaluationDetails;
 use App\Models\EvaluationForm;
+use App\Models\Part;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,9 +42,9 @@ class EvaluationFormController extends Controller
         $customers = Customer::where('is_deleted', 0)->get();
         $brands = Brand::where('is_deleted', 0)->get();
         $models = BrandModel::where('brand_id', 1)->where('is_deleted', 0)->get();
+        $parts = Part::paginate(50);
 
-
-        return view('user.evaluation-forms.add', compact('customers', 'brands', 'models'));
+        return view('user.evaluation-forms.add', compact('customers', 'brands', 'models', 'parts'));
     }
 
     public function store(Request $request){
@@ -150,9 +151,9 @@ class EvaluationFormController extends Controller
         $brands = Brand::where('is_deleted', 0)->get();
         $models = BrandModel::where('brand_id', 1)->where('is_deleted', 0)->get();
         $form = EvaluationForm::with('details', 'customer')->where('key', $request->key)->first();
+        $parts = Part::paginate(50);
 
-
-        return view('user.evaluation-forms.edit', compact('customers', 'brands', 'models', 'form'));
+        return view('user.evaluation-forms.edit', compact('customers', 'brands', 'models', 'form', 'parts'));
     }
 
     public function update(Request $request){
@@ -227,9 +228,12 @@ class EvaluationFormController extends Controller
         $evaluation->status = $status;
         $evaluation->disc = $disc;
         $evaluation->remarks = $remarks;
-        $evaluation->encoder = Auth::user()->name;
         $evaluation->date_received = $date_received;
-        $evaluation->save();
+        // $evaluation->save();
+
+        $dirtyAttributes = $evaluation->getDirty();
+
+        dd($dirtyAttributes);
 
         EvaluationDetails::where('evaluation_id', $evaluation->id)->delete();
 
@@ -287,5 +291,27 @@ class EvaluationFormController extends Controller
         }
 
         echo $result;
+    }
+
+    public function searchParts(Request $request){
+        $parts = Part::whereRaw("CONCAT_WS(' ', partno, partname, brand) LIKE '%{$request->searchValue}%'")->paginate(50);
+        $partsTotal = $parts->total();
+
+        $partsUl = '';
+
+        foreach($parts as $part){
+            $partsUl .= '
+                <li data-partno="'.$part->partno.'" data-partname="'.$part->partname.'" data-price="'.$part->price.'" class="pl-2 py-2 pr-5 first:border-0 border-t border-gray-300 hover:bg-gray-200 cursor-pointer">
+                '.$part->partno.' - '.$part->partname.'
+                </li>
+            ';
+        }
+
+        $response = [
+            "partsUl" => $partsUl,
+            "partsTotal" => $partsTotal,
+        ];
+
+        echo json_encode($response);
     }
 }

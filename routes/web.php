@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/evaluation-forms/get-form', [EvaluationFormController::class, 'getForm'])->name('form.getForm');
     Route::post('/evaluation-forms/get-customer', [EvaluationFormController::class, 'getCustomer'])->name('form.getCustomer');
     Route::post('/evaluation-forms/get-model', [EvaluationFormController::class, 'getModel'])->name('form.getModel');
+    Route::post('/evaluation-forms/search-parts', [EvaluationFormController::class, 'searchParts'])->name('form.searchParts');
     Route::get('/evaluation-forms/delete/{key}', [EvaluationFormController::class, 'delete'])->name('form.delete');
 
     Route::get('/system-management/users', [UserController::class, 'index'])->name('users.index');

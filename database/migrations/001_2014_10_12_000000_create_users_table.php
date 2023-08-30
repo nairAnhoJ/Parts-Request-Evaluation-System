@@ -16,7 +16,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('id_number')->unique();
             $table->string('name');
-            $table->integer('role')->default(1);
+            $table->integer('role')->default(1); 
             $table->string('password')->default(Hash::make('password2023'));
             $table->integer('first_time_login')->default(1);
             $table->boolean('is_active')->default(1);
