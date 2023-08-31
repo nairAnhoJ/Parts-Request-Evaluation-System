@@ -172,92 +172,83 @@
                                     <div class="w-full grid grid-cols-1 mt-10">
                                         <div>
                                             <p class="text-sm mb-3">Validated By:</p>
-                                            <div class="flex w-full gap-x-10 px-20">
-                                                <div class="flex flex-col items-center justify-center self-end w-2/5">
-                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base">
-                                                         <span class="font-bold">JOHN ARIAN MALONDRAS</span>
+                                            <div class="flex w-full gap-x-7 pl-5 xl:!pl-10">
+                                                <div class="flex flex-col items-center justify-center self-end w-[290px] 2xl:w-[370px]">
+                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
+                                                         <span id="viewValidator" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-sm">SA/SC/TECH</p>
+                                                    <p class="text-xs 2xl:!text-sm">SA/SC/TECH</p>
                                                 </div>
-                                                <div class="flex flex-col items-center justify-center self-end w-1/6">
-                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base">
-                                                        <span class="font-bold">08/29/2023</span>
+                                                <div class="flex flex-col items-center justify-center self-end w-[110px] 2xl:w-[150px]">
+                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
+                                                        <span id="viewDateValidated" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-sm">Date</p>
+                                                    <p class="text-xs 2xl:!text-sm">Date</p>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="mt-3">
+                                        <div class="mt-5">
                                             <p class="text-sm mb-3">Approved By:</p>
-                                            <div class="flex w-full gap-x-10 px-20">
-                                                <div class="flex flex-col items-center justify-center self-end w-2/5">
-                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base">
-                                                         <span class="font-bold">CLARK JAN DEXTER PASTOLERO</span>
+                                            <div class="flex w-full gap-x-7 pl-5 xl:!pl-10">
+                                                <div class="flex flex-col items-center justify-center self-end w-[290px] 2xl:w-[370px]">
+                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
+                                                         <span id="viewApprover" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-sm">MNGR/HEAD</p>
+                                                    <p class="text-xs 2xl:!text-sm">MNGR/HEAD</p>
                                                 </div>
-                                                <div class="flex flex-col items-center justify-center self-end w-1/6">
-                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base">
-                                                        <span class="font-bold">08/29/2023</span>
+                                                <div class="flex flex-col items-center justify-center self-end w-[110px] 2xl:w-[150px]">
+                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
+                                                        <span id="viewDateApproved" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-sm">Date</p>
+                                                    <p class="text-xs 2xl:!text-sm">Date</p>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="mt-3">
+                                        <div class="mt-5">
                                             <p class="text-sm mb-3">Encoded By:</p>
-                                            <div class="flex w-full gap-x-10 px-20">
-                                                <div class="flex flex-col items-center justify-center self-end w-2/5">
-                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base">
-                                                         <span class="font-bold">RAYMOND FRANCE LABASTIN</span>
+                                            <div class="flex w-full gap-x-7 pl-5 xl:!pl-10">
+                                                <div class="flex flex-col items-center justify-center self-end w-[290px] 2xl:w-[370px]">
+                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
+                                                         <span id="viewEncoder" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-sm">ENCODER</p>
+                                                    <p class="text-xs 2xl:!text-sm">ENCODER</p>
                                                 </div>
-                                                <div class="flex flex-col items-center justify-center self-end w-1/6">
-                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base">
-                                                        <span class="font-bold">08/29/2023</span>
+                                                <div class="flex flex-col items-center justify-center self-end w-[110px] 2xl:w-[150px]">
+                                                    <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
+                                                        <span id="viewDateEncoded" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-sm">Date</p>
+                                                    <p class="text-xs 2xl:!text-sm">Date</p>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        {{-- <div class="flex flex-col items-center justify-center self-end">
-                                            <div class="border-b border-gray-400 w-1/2 text-center whitespace-nowrap text-sm">
-                                                 <span class="mr-5">John Arian Malondras</span><span class="text-xs">08/29/2023</span>
-                                            </div>
-                                            <p class="text-sm font-bold">SA/SC/TECH</p>
-                                        </div>
-                                        <div class="flex flex-col items-center justify-center self-end">
-                                            <div class="border-b border-gray-400 w-1/2 text-center whitespace-nowrap text-sm">
-                                                <span class="mr-5">John Arian Malondras</span><span class="text-xs">08/29/2023</span>
-                                            </div>
-                                            <p class="text-sm font-bold">MNGR/HEAD</p>
-                                        </div>
-                                        <div class="flex flex-col items-center justify-center">
-                                            <p class="text-sm">SQ NUMBER</p>
-                                            <div class="border-b border-gray-400 w-1/2 text-center whitespace-nowrap text-sm">
-                                                <span class="mr-5">John Arian Malondras</span><span class="text-xs">08/29/2023</span>
-                                            </div>
-                                            <p class="text-sm font-bold">ENCODER</p>
-                                        </div> --}}
                                     </div>
 
                                 </div>
                             </div>
                             <div class="w-full">
                                 <div class="w-full h-[calc(100vh-204px)] overflow-x-hidden overflow-y-auto pl-4">
-
+                                    <div class="relative">
+                                        <div class="sticky top-0 bg-white py-2">
+                                            <div class="flex items-center mb-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="h-6 w-6"><path d="M477-120q-149 0-253-105.5T120-481h60q0 125 86 213t211 88q127 0 215-89t88-216q0-124-89-209.5T477-780q-68 0-127.5 31T246-667h105v60H142v-208h60v106q52-61 123.5-96T477-840q75 0 141 28t115.5 76.5Q783-687 811.5-622T840-482q0 75-28.5 141t-78 115Q684-177 618-148.5T477-120Zm128-197L451-469v-214h60v189l137 134-43 43Z"/></svg>
+                                                <h3 class="ml-1">History Logs</h3>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div id="logsDiv">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Modal footer -->
-                    <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        {{-- <button data-modal-hide="viewModal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button> --}}
-                        <button data-modal-hide="viewModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Close</button>
+                    <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
+                        <button id="viewValidate" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">VALIDATE</button>
+                        <button id="viewApprove" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">APPROVE</button>
+                        <button data-modal-hide="viewModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-bold px-5 py-2.5 hover:text-gray-900 focus:z-10">CLOSE</button>
                     </div>
                 </div>
             </div>
@@ -317,7 +308,7 @@
                     </thead>
                     <tbody>
                         @foreach ($forms as $form)
-                            <tr class="formRow bg-white border-b even:bg-gray-50 hover:bg-gray-100 cursor-pointer">
+                            <tr class="viewForm bg-white border-b even:bg-gray-50 hover:bg-gray-100 cursor-pointer">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     <span data-key="{{ $form->key }}">
                                         {{ $form->number }}
@@ -352,11 +343,7 @@
 
     <script>
         $(document).ready(function() {
-            $('nav[role="navigation"]').addClass('w-full')
-            $('nav[role="navigation"]').find('div:eq(1)').addClass('w-full')
-            $('span[aria-current="page"]').find('span').addClass('!bg-blue-500 text-white !border-blue-500')
-            $('span[aria-disabled="true"]').find('span').addClass('!bg-gray-100 opacity-70')
-
+            var key, role = "{{ Auth::user()->role }}";
             $('.deleteButton').click(function(){
                 var key = $(this).data('key');
                 $('#deleteForm').attr('action', `/evaluation-forms/delete/${key}`);
@@ -366,9 +353,9 @@
                 window.location.href = "{{ route('form.index') }}";
             });
 
-            $('.formRow').click(function(e){
+            $('.viewForm').click(function(e){
                 if(!$(e.target).is('.editButton, .deleteButton')){
-                    var key = $(this).find('span').data('key');
+                    key = $(this).find('span').data('key');
                     var _token = $('input[name="_token"]').val();
 
                     $.ajax({
@@ -399,6 +386,15 @@
                             $("#viewRemarks").html(response.form['remarks']);
                             $("#viewSQNumber").html(response.form['sq_number']);
 
+                            $("#viewValidator").html(response.form['validator']);
+                            $("#viewDateValidated").html(response.form['datetime_validated']);
+
+                            $("#viewApprover").html(response.form['approver']);
+                            $("#viewDateApproved").html(response.form['datetime_apptoved']);
+
+                            $("#viewEncoder").html(response.form['encoder']);
+                            $("#viewDateEncoded").html(response.form['datetime_encoded']);
+
                             $('#partsContainer').html(`
                                 <div class="flex w-full border-y">
                                     <div class="text-center py- w-[5%]">No</div>
@@ -423,6 +419,17 @@
                                     </div>
                                 `);
                             });
+
+                            $('#logsDiv').html(response.logRes);
+
+
+                            $('.acbtn').addClass('hidden');
+                            if(role == 1 && response.form['is_validated'] == 0){
+                                $('#viewValidate').removeClass('hidden');
+                            }else if(role == 2 && response.form['is_validated'] == 1 && response.form['is_approved'] == 0){
+                                $('#viewApprove').removeClass('hidden');
+                            }
+
 
                             $('#viewButton').click();
                         },

@@ -33,6 +33,15 @@
                         <label for="" class="text-gray-700 font-bold">Full Name <span class="text-red-500">*</span></label>
                         <input type="text" name="name" value="{{ $user->name }}" class="{{ old('name') == '' && session('error') ? 'border-red-500' : '' }} w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off">
                     </div>
+                    <div class="mb-8">
+                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
+                        <select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option {{ $user->role == 1 ? 'selected' : '' }} value="1">TECHNICIAN / SERVICE COORDINATOR</option>
+                            <option {{ $user->role == 2 ? 'selected' : '' }} value="2">SERVICE HEAD</option>
+                            <option {{ $user->role == 3 ? 'selected' : '' }} value="3">PARTS EVALUATOR</option>
+                            <option {{ $user->role == 4 ? 'selected' : '' }} value="4">SALES QUOTATION ENCODER</option>
+                        </select>
+                    </div>
                     <div class="flex justify-between gap-x-5 w-full">
                         <button type="submit" class="w-1/2 lg:w-1/3 bg-blue-500 py-2 rounded-lg text-white font-bold hover:scale-105">UPDATE</button>
                         <a href="{{ route('users.index') }}" class="w-1/2 lg:w-1/3 text-center bg-gray-500 hover:scale-105 py-2 rounded-lg text-white font-bold">BACK</a>

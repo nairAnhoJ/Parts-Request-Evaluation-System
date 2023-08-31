@@ -7,6 +7,7 @@ use App\Models\BrandModel;
 use App\Models\Customer;
 use App\Models\EvaluationDetails;
 use App\Models\EvaluationForm;
+use App\Models\Log;
 use App\Models\Part;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -229,11 +230,26 @@ class EvaluationFormController extends Controller
         $evaluation->disc = $disc;
         $evaluation->remarks = $remarks;
         $evaluation->date_received = $date_received;
-        // $evaluation->save();
 
         $dirtyAttributes = $evaluation->getDirty();
 
-        dd($dirtyAttributes);
+        foreach($dirtyAttributes as $attribute => $newValue){
+            $oldValue = $evaluation->getOriginal($attribute);
+
+            $field = ucwords(str_replace('_', ' ', $attribute));
+
+            $newLog = new Log();
+            $newLog->table = 'FORMS';
+            $newLog->table_key = $request->key;
+            $newLog->action = 'UPDATE';
+            $newLog->description = $evaluation->number;
+            $newLog->field = $field;
+            $newLog->before = $oldValue;
+            $newLog->after = $newValue;
+            $newLog->user_id = Auth::user()->id;
+            $newLog->save();
+        }
+        $evaluation->save();
 
         EvaluationDetails::where('evaluation_id', $evaluation->id)->delete();
 
@@ -260,9 +276,29 @@ class EvaluationFormController extends Controller
     public function getForm(Request $request){
         $key = $request->key;
         $form = EvaluationForm::with('details', 'customer', 'brand')->where('key', $key)->first();
+        $logs = Log::with('user')->where('table_key', $key)->get();
+
+        $logRes = '';
+
+        foreach($logs as $log){
+            $logRes .= '
+                <div class="text-sm mt-2">
+                    <div class="flex justify-between bg-gray-200 px-1.5 py-0.5">
+                        <p class="font-semibold">'.$log->created_at.'</p>
+                        <p>'.$log->user->name.'</p>
+                    </div>
+                    <div id="logsDiv" class="pl-7">
+                        <div>
+                            • <span>'.ucfirst(strtolower($log->action)).'</span> <span>'.ucwords(strtolower($log->field)).'</span>: <span></span><span>'.$log->before.'</span> ⇒ <span>'.$log->after.'</span>
+                        </div>
+                    </div>
+                </div>
+            ';
+        }
 
         $response = [
-            "form" => $form
+            "form" => $form,
+            "logRes" => $logRes
         ];
 
         echo json_encode($response);

@@ -102,18 +102,37 @@
                     <tr>
                         <th>ID Number</th>
                         <th>Name</th>
+                        <th>Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
+                        @php
+                            if($user->role == 0){
+                                $role = 'ADMINISTRATOR';
+                            }elseif ($user->role == 1) {
+                                $role = 'TECHNICIAN / SERVICE COORDINATOR';
+                            }elseif ($user->role == 2) {
+                                $role = 'SERVICE HEAD';
+                            }elseif ($user->role == 3) {
+                                $role = 'PARTS EVALUATOR';
+                            }elseif ($user->role == 4) {
+                                $role = 'SALES QUOTATION ENCODER';
+                            }
+                        @endphp
                         <tr>
                             <td>{{ $user->id_number }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $role }}</td>
                             <td>
-                                <a href="{{ url('/system-management/users/edit/'.$user->key) }}" class="hover:underline text-blue-500">EDIT</a> |
-                                <button data-modal-target="resetModal" data-modal-toggle="resetModal" data-key="{{ $user->key }}" class="resetButton hover:underline text-orange-500">RESET</button> |
-                                <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $user->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
+                                @if ($user->role != 0)
+                                    <a href="{{ url('/system-management/users/edit/'.$user->key) }}" class="hover:underline text-blue-500">EDIT</a> |
+                                @endif
+                                <button data-modal-target="resetModal" data-modal-toggle="resetModal" data-key="{{ $user->key }}" class="resetButton hover:underline text-orange-500">RESET</button>
+                                @if ($user->role != 0)
+                                    | <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $user->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

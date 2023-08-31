@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -32,6 +33,7 @@ class UserController extends Controller
 
         $id = $request->id;
         $name = $request->name;
+        $role = $request->role;
 
         $unique = false;
         $key = null;
@@ -47,6 +49,7 @@ class UserController extends Controller
         $user = new User();
         $user->id_number = strtoupper($id);
         $user->name = strtoupper($name);
+        $user->role = $role;
         $user->key = $key;
         $user->save();
 
@@ -71,10 +74,12 @@ class UserController extends Controller
 
         $id = $request->id;
         $name = $request->name;
+        $role = $request->role;
 
         $user = User::where('key', $key)->first();
         $user->id_number = strtoupper($id);
         $user->name = strtoupper($name);
+        $user->role = $role;
         $user->save();
 
         return redirect()->route('users.index')->with('success', "User edited successfully!");
@@ -88,6 +93,7 @@ class UserController extends Controller
 
     public function reset($key){
         $user = User::where('key', $key)->first();
+        $user->password = Hash::make('password2023');
         $user->first_time_login = 1;
         $user->save();
 
