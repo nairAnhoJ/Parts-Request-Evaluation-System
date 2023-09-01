@@ -22,4 +22,16 @@ class EvaluationForm extends Model
     public function brand(){
         return $this->belongsTo(Brand::class, 'brand');
     }
+
+    public function validator(){
+        return $this->belongsTo(User::class, 'validator');
+    }
+
+    public function approver(){
+        return $this->belongsTo(User::class, 'approver');
+    }
+
+    public function encoder(){
+        return $this->belongsTo(User::class, 'encoder');
+    }
 }

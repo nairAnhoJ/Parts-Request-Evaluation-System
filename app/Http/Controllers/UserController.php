@@ -86,7 +86,9 @@ class UserController extends Controller
     }
 
     public function delete($key){
-        User::where('key', $key)->delete();
+        $user = User::where('key', $key)->first();
+        $user->is_deleted = 1;
+        $user->save();
 
         return redirect()->route('users.index')->with('success', "User deleted successfully!");
     }

@@ -273,9 +273,28 @@ class EvaluationFormController extends Controller
         return redirect()->route('form.index')->with('success', 'Success');
     }
 
+    public function delete($key){
+        $form = EvaluationForm::where('key', $key)->first();
+        $form->is_deleted = 1;
+        $form->save();
+
+        $newLog = new Log();
+        $newLog->table = 'FORMS';
+        $newLog->table_key = $key;
+        $newLog->action = 'DELETE';
+        $newLog->description = $form->number;
+        $newLog->field = '';
+        $newLog->before = '';
+        $newLog->after = '';
+        $newLog->user_id = Auth::user()->id;
+        $newLog->save();
+
+        return redirect()->route('form.index')->with('success', "Evaluation form deleted successfully!");
+    }
+
     public function getForm(Request $request){
         $key = $request->key;
-        $form = EvaluationForm::with('details', 'customer', 'brand')->where('key', $key)->first();
+        $form = EvaluationForm::with('details', 'customer', 'brand', 'validator', 'approver', 'encoder')->where('key', $key)->first();
         $logs = Log::with('user')->where('table_key', $key)->get();
 
         $logRes = '';
@@ -289,16 +308,23 @@ class EvaluationFormController extends Controller
                     </div>
                     <div id="logsDiv" class="pl-7">
                         <div>
-                            • <span>'.ucfirst(strtolower($log->action)).'</span> <span>'.ucwords(strtolower($log->field)).'</span>: <span></span><span>'.$log->before.'</span> ⇒ <span>'.$log->after.'</span>
+                            • <span>'.ucwords(strtolower($log->action)).'</span> <span>'.ucwords(strtolower($log->field)).'</span>: <span></span><span>'.$log->before.'</span> ⇒ <span>'.$log->after.'</span>
                         </div>
                     </div>
                 </div>
             ';
         }
 
+        $date_validated = date('m/d/Y', strtotime($form->datetime_validated));
+        $date_approved = date('m/d/Y', strtotime($form->datetime_approved));
+        $date_encoded = date('m/d/Y', strtotime($form->datetime_encoded));
+
         $response = [
             "form" => $form,
-            "logRes" => $logRes
+            "logRes" => $logRes,
+            "date_validated" => $date_validated,
+            "date_approved" => $date_approved,
+            "date_encoded" => $date_encoded
         ];
 
         echo json_encode($response);
@@ -349,5 +375,92 @@ class EvaluationFormController extends Controller
         ];
 
         echo json_encode($response);
+    }
+
+    public function validateForm($key){
+        $form = EvaluationForm::where('key', $key)->first();
+        $form->is_validated = 1;
+        $form->validator = Auth::user()->id;
+        $form->datetime_validated = date('Y-m-d H:i:s');
+        $form->save();
+
+        $newLog = new Log();
+        $newLog->table = 'FORMS';
+        $newLog->table_key = $key;
+        $newLog->action = 'VALIDATE';
+        $newLog->description = $form->number;
+        $newLog->field = '';
+        $newLog->before = '';
+        $newLog->after = '';
+        $newLog->user_id = Auth::user()->id;
+        $newLog->save();
+
+        return redirect()->route('form.index')->with('success', "Evaluation Form Validation Successful!");
+    }
+
+    public function cancelValidation($key){
+        $form = EvaluationForm::where('key', $key)->first();
+        $form->is_validated = 0;
+        $form->validator = '';
+        $form->datetime_validated = '';
+        $form->save();
+
+        $newLog = new Log();
+        $newLog->table = 'FORMS';
+        $newLog->table_key = $key;
+        $newLog->action = 'CANCEL VALIDATION';
+        $newLog->description = $form->number;
+        $newLog->field = '';
+        $newLog->before = '';
+        $newLog->after = '';
+        $newLog->user_id = Auth::user()->id;
+        $newLog->save();
+
+        return redirect()->route('form.index')->with('success', "Validation Successfully Cancelled!");
+    }
+
+    public function approveForm($key){
+        $form = EvaluationForm::where('key', $key)->first();
+        $form->is_approved = 1;
+        $form->approver = Auth::user()->id;
+        $form->datetime_approved = date('Y-m-d H:i:s');
+        $form->save();
+
+        $newLog = new Log();
+        $newLog->table = 'FORMS';
+        $newLog->table_key = $key;
+        $newLog->action = 'APPROVE';
+        $newLog->description = $form->number;
+        $newLog->field = '';
+        $newLog->before = '';
+        $newLog->after = '';
+        $newLog->user_id = Auth::user()->id;
+        $newLog->save();
+
+        return redirect()->route('form.index')->with('success', "Evaluation Form Validation Successful!");
+    }
+
+    public function encode(Request $request){
+        $key = $request->encodeKey;
+        $sq_number = $request->sq_number;
+
+        $form = EvaluationForm::where('key', $key)->first();
+        $form->sq_number = $sq_number;
+        $form->encoder = Auth::user()->id;
+        $form->datetime_encoded = date('Y-m-d H:i:s');
+        $form->save();
+
+        $newLog = new Log();
+        $newLog->table = 'FORMS';
+        $newLog->table_key = $key;
+        $newLog->action = 'APPROVE';
+        $newLog->description = $form->number;
+        $newLog->field = '';
+        $newLog->before = '';
+        $newLog->after = '';
+        $newLog->user_id = Auth::user()->id;
+        $newLog->save();
+
+        return redirect()->route('form.index')->with('success', "Evaluation Form Successfully Encoded!");
     }
 }

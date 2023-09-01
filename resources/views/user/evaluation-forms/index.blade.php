@@ -23,6 +23,112 @@
         @endif
     {{-- SUCCESS ALERT --}}
 
+    {{-- VALIDATE MODAL --}}
+        <div id="validateModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="validateModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <form id="validateForm" method="GET" action="" class="p-6 text-center">
+                        @csrf
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to validate this?</h3>
+                        <button data-modal-hide="validateModal" type="submit" class="text-white bg-blue-600 hover:scale-105 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            Yes, I'm sure
+                        </button>
+                        <button data-modal-hide="validateModal" type="button" class="text-gray-500 bg-white hover:scale-105 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">No, cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{-- VALIDATE MODAL --}}
+
+    {{-- CANCEL VALIDATION MODAL --}}
+        <div id="cancelValidationModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="cancelValidationModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <form id="cancelValidationForm" method="GET" action="" class="p-6 text-center">
+                        @csrf
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to cancel the validation?</h3>
+                        <button data-modal-hide="cancelValidationModal" type="submit" class="text-white bg-red-600 hover:scale-105 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            Yes, I'm sure
+                        </button>
+                        <button data-modal-hide="cancelValidationModal" type="button" class="text-gray-500 bg-white hover:scale-105 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">No, cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{-- CANCEL VALIDATION MODAL --}}
+
+    {{-- APPROVE MODAL --}}
+        <div id="approveModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="approveModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <form id="approveForm" method="GET" action="" class="p-6 text-center">
+                        @csrf
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to approve this?</h3>
+                        <button data-modal-hide="approveModal" type="submit" class="text-white bg-blue-600 hover:scale-105 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            Yes, I'm sure
+                        </button>
+                        <button data-modal-hide="approveModal" type="button" class="text-gray-500 bg-white hover:scale-105 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">No, cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{-- APPROVE MODAL --}}
+
+    {{-- ENCODE MODAL --}}
+        <div id="encodeModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="encodeModal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <form id="encodeForm" method="GET" action="" class="p-6 text-center">
+                        @csrf
+                        <input type="hidden" id="encodeKey" name="encodeKey">
+                        <h1 class="font-bold text-gray-600 text-xl">MARK AS ENCODE</h1>
+                        <div class="mb-3">
+                            <label for="sq_number" class="block text-sm text-left font-semibold text-gray-600">SQ Number <span class="text-red-500">*</span></label>
+                            <input type="text" id="sq_number" name="sq_number" class="w-full lg:w-1/2 border-gray-300 rounded-lg shadow-inner" autocomplete="off" required>
+                        </div>
+                        <button data-modal-hide="encodeModal" type="submit" class="text-white bg-blue-600 hover:scale-105 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                            Submit
+                        </button>
+                        <button data-modal-hide="encodeModal" type="button" class="text-gray-500 bg-white hover:scale-105 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{-- ENCODE MODAL --}}
+
     {{-- DELETE MODAL --}}
         <div id="deleteModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-md max-h-full">
@@ -38,7 +144,7 @@
                         <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to delete this user?</h3>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500">Are you sure you want to delete this evaluation form?</h3>
                         <button data-modal-hide="deleteModal" type="submit" class="text-white bg-red-600 hover:scale-105 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             Yes, I'm sure
                         </button>
@@ -54,9 +160,9 @@
         <div id="viewModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 max-h-full">
             <div class="relative w-full h-full max-h-full">
                 <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full w-full">
+                <div class="relative bg-white rounded-lg shadow h-full w-full">
                     <!-- Modal header -->
-                    <div class="flex items-end justify-between p-4 border-b rounded-t dark:border-gray-600">
+                    <div class="flex items-end justify-between p-4 border-b rounded-t">
 
                         <div class="w-1/2 flex justify-between items-center text-center text-sm">
                             <div class="w-full flex items-center">
@@ -68,11 +174,7 @@
                                 <p class="mr-1">Control Number</p>
                             </div>
                         </div>
-
-                        {{-- <h3 id="viewName" class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Customer Name
-                        </h3> --}}
-                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="viewModal">
+                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="viewModal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                             </svg>
@@ -183,7 +285,7 @@
                                                     <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
                                                         <span id="viewDateValidated" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-xs 2xl:!text-sm">Date</p>
+                                                    <p class="text-xs 2xl:!text-sm">Date & Time</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -201,7 +303,7 @@
                                                     <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
                                                         <span id="viewDateApproved" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-xs 2xl:!text-sm">Date</p>
+                                                    <p class="text-xs 2xl:!text-sm">Date & Time</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -219,7 +321,7 @@
                                                     <div class="w-full border-b border-gray-400 text-center whitespace-nowrap text-base h-[25px]">
                                                         <span id="viewDateEncoded" class="font-bold text-sm 2xl:!text-base"></span>
                                                     </div>
-                                                    <p class="text-xs 2xl:!text-sm">Date</p>
+                                                    <p class="text-xs 2xl:!text-sm">Date & Time</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -246,8 +348,15 @@
                     </div>
                     <!-- Modal footer -->
                     <div class="flex items-center p-4 space-x-2 border-t border-gray-200 rounded-b">
-                        <button id="viewValidate" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">VALIDATE</button>
-                        <button id="viewApprove" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">APPROVE</button>
+
+                        <button id="viewValidate" data-modal-target="validateModal" data-modal-show="validateModal" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">VALIDATE</button>
+
+                        <button id="viewCancelValidation" data-modal-target="cancelValidationModal" data-modal-show="cancelValidationModal" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">CANCEL VALIDATION</button>
+
+                        <button id="viewApprove" data-modal-target="approveModal" data-modal-show="approveModal" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">APPROVE</button>
+
+                        <button id="viewEncode" data-modal-target="encodeModal" data-modal-show="encodeModal" data-modal-hide="viewModal" type="button" class="acbtn text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 py-2.5 text-center">MARK AS ENCODED</button>
+
                         <button data-modal-hide="viewModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-bold px-5 py-2.5 hover:text-gray-900 focus:z-10">CLOSE</button>
                     </div>
                 </div>
@@ -299,7 +408,10 @@
                                 Customer Name
                             </th>
                             <th scope="col" class="px-6 py-3 text-center">
-                                Encoder
+                                Originator
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Status
                             </th>
                             <th scope="col" class="px-6 py-3 text-center">
                                 Action
@@ -324,7 +436,20 @@
                                     {{ $form->originator }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <a href="{{ url('/evaluation-forms/edit?key='.$form->key) }}" class="editButton hover:underline text-blue-500">EDIT</a> |
+                                    @if ($form->is_validated == 0)
+                                        PENDING VALIDATION
+                                    @elseif($form->is_approved == 0)
+                                        VALIDATED
+                                    @elseif($form->sq_number == '' || $form->sq_number == null)
+                                        APPROVED
+                                    @else
+                                        COMPLETED
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    @if ($form->is_validated == 0)
+                                        <a href="{{ url('/evaluation-forms/edit?key='.$form->key) }}" class="editButton hover:underline text-blue-500">EDIT</a> |
+                                    @endif
                                     <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $form->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
                                 </td>
                             </tr>
@@ -344,8 +469,9 @@
     <script>
         $(document).ready(function() {
             var key, role = "{{ Auth::user()->role }}";
+            
             $('.deleteButton').click(function(){
-                var key = $(this).data('key');
+                key = $(this).data('key');
                 $('#deleteForm').attr('action', `/evaluation-forms/delete/${key}`);
             });
 
@@ -367,7 +493,6 @@
                             _token: _token
                         },
                         success: function(response) {
-                            console.log(response.form['details']);
                             $("#viewNumber").html(response.form['number']);
                             $("#viewControlNumber").html(response.form['control_number']);
                             $("#viewName").html(response.form['customer']['name']);
@@ -386,14 +511,29 @@
                             $("#viewRemarks").html(response.form['remarks']);
                             $("#viewSQNumber").html(response.form['sq_number']);
 
-                            $("#viewValidator").html(response.form['validator']);
-                            $("#viewDateValidated").html(response.form['datetime_validated']);
+                            if(response.form['is_validated'] == 1){
+                                $("#viewValidator").html(response.form['validator']['name']);
+                                $("#viewDateValidated").html(response.date_validated);
+                            }else{
+                                $("#viewValidator").html('');
+                                $("#viewDateValidated").html('');
+                            }
 
-                            $("#viewApprover").html(response.form['approver']);
-                            $("#viewDateApproved").html(response.form['datetime_apptoved']);
+                            if(response.form['is_approved'] == 1){
+                                $("#viewApprover").html(response.form['approver']['name']);
+                                $("#viewDateApproved").html(response.date_approved);
+                            }else{
+                                $("#viewApprover").html('');
+                                $("#viewDateApproved").html('');
+                            }
 
-                            $("#viewEncoder").html(response.form['encoder']);
-                            $("#viewDateEncoded").html(response.form['datetime_encoded']);
+                            if(response.form['sq_number'] != '' || response.form['sq_number'] != null){
+                                $("#viewEncoder").html(response.form['encoder']['name']);
+                                $("#viewDateEncoded").html(response.date_encoded);
+                            }else{
+                                $("#viewEncoder").html('');
+                                $("#viewDateEncoded").html('');
+                            }
 
                             $('#partsContainer').html(`
                                 <div class="flex w-full border-y">
@@ -422,14 +562,22 @@
 
                             $('#logsDiv').html(response.logRes);
 
-
                             $('.acbtn').addClass('hidden');
                             if(role == 1 && response.form['is_validated'] == 0){
                                 $('#viewValidate').removeClass('hidden');
+                            }else if(role == 1 && response.form['is_validated'] == 1){
+                                $('#viewCancelValidation').removeClass('hidden');
                             }else if(role == 2 && response.form['is_validated'] == 1 && response.form['is_approved'] == 0){
                                 $('#viewApprove').removeClass('hidden');
+                            }else if(role == 4 && response.form['is_validated'] == 1 && response.form['is_approved'] == 1 && response.form['sq_number'] == '' && response.form['sq_number'] == null){
+                                $('#viewEncode').removeClass('hidden');
                             }
 
+                            $('#encodeForm').attr('action', `{{ route('form.encode') }}`);
+                            $('#encodeKey').val(key);
+                            $('#validateForm').attr('action', `/evaluation-forms/validate/${key}`);
+                            $('#cancelValidationForm').attr('action', `/evaluation-forms/validate/cancel/${key}`);
+                            $('#approveForm').attr('action', `/evaluation-forms/approve/${key}`);
 
                             $('#viewButton').click();
                         },

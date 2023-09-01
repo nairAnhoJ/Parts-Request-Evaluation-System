@@ -46,7 +46,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/evaluation-forms/get-customer', [EvaluationFormController::class, 'getCustomer'])->name('form.getCustomer');
     Route::post('/evaluation-forms/get-model', [EvaluationFormController::class, 'getModel'])->name('form.getModel');
     Route::post('/evaluation-forms/search-parts', [EvaluationFormController::class, 'searchParts'])->name('form.searchParts');
+    Route::get('/evaluation-forms/encode', [EvaluationFormController::class, 'encode'])->name('form.encode');
     Route::get('/evaluation-forms/delete/{key}', [EvaluationFormController::class, 'delete'])->name('form.delete');
+    Route::get('/evaluation-forms/validate/cancel/{key}', [EvaluationFormController::class, 'cancelValidation'])->name('form.cancelValidation');
+    Route::get('/evaluation-forms/validate/{key}', [EvaluationFormController::class, 'validateForm'])->name('form.validate');
+    Route::get('/evaluation-forms/approve/{key}', [EvaluationFormController::class, 'approveForm'])->name('form.approveForm');
 
     Route::get('/system-management/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/system-management/users/add', [UserController::class, 'add'])->name('users.add');
