@@ -371,9 +371,12 @@
                 <div class="mb-3">
                     <div class="md:grid md:grid-cols-2">
                         <div class="w-24 mb-3 md:mb-0">
-                            <a href="{{ route('form.add') }}" class="flex justify-center items-center text-white bg-blue-600 hover:scale-105 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm py-2 focus:outline-none mt-px">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition duration-75 mr-1" fill="currentColor" viewBox="0 -960 960 960"><path d="M440.391-190.391v-250h-250v-79.218h250v-250h79.218v250h250v79.218h-250v250h-79.218Z"/></svg>
-                                <span>ADD</span></a>
+                            @if (Auth::user()->role == 1)
+                                <a href="{{ route('form.add') }}" class="flex justify-center items-center text-white bg-blue-600 hover:scale-105 focus:ring-4 focus:ring-blue-300 font-semibold rounded-lg text-sm py-2 focus:outline-none mt-px">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition duration-75 mr-1" fill="currentColor" viewBox="0 -960 960 960"><path d="M440.391-190.391v-250h-250v-79.218h250v-250h79.218v250h250v79.218h-250v250h-79.218Z"/></svg>
+                                    <span>ADD</span>
+                                </a>
+                            @endif
                         </div>
                         <div class="justify-self-end w-full xl:w-4/5">
                             <form id="searchForm" method="GET" action="{{ route('form.index') }}" class="w-full">
@@ -450,7 +453,9 @@
                                     @if ($form->is_validated == 0)
                                         <a href="{{ url('/evaluation-forms/edit?key='.$form->key) }}" class="editButton hover:underline text-blue-500">EDIT</a> |
                                     @endif
-                                    <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $form->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
+                                    @if ($form->sq_number == '' || $form->sq_number == null)
+                                        <button data-modal-target="deleteModal" data-modal-toggle="deleteModal" data-key="{{ $form->key }}" class="deleteButton hover:underline text-red-500">DELETE</button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -469,7 +474,7 @@
     <script>
         $(document).ready(function() {
             var key, role = "{{ Auth::user()->role }}";
-            
+
             $('.deleteButton').click(function(){
                 key = $(this).data('key');
                 $('#deleteForm').attr('action', `/evaluation-forms/delete/${key}`);
@@ -565,7 +570,7 @@
                             $('.acbtn').addClass('hidden');
                             if(role == 1 && response.form['is_validated'] == 0){
                                 $('#viewValidate').removeClass('hidden');
-                            }else if(role == 1 && response.form['is_validated'] == 1){
+                            }else if(role == 1 && response.form['is_validated'] == 1 && response.form['is_approved'] == 0){
                                 $('#viewCancelValidation').removeClass('hidden');
                             }else if(role == 2 && response.form['is_validated'] == 1 && response.form['is_approved'] == 0){
                                 $('#viewApprove').removeClass('hidden');
